@@ -1,0 +1,2973 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Portfolio &amp; Visual Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #090a0f;
+      --bg-alt: #0f1118;
+      --surface: #151822;
+      --surface-hover: #1c202d;
+      --surface-elevated: #202534;
+      --border: rgba(255, 255, 255, 0.09);
+      --border-strong: rgba(214, 178, 118, 0.38);
+      --ink: #f4f4f6;
+      --ink-secondary: #c9cdd6;
+      --muted: #8b92a5;
+      --brand: #d6b276;
+      --brand-hover: #e5c690;
+      --brand-subtle: rgba(214, 178, 118, 0.12);
+      --brand-ink: #090a0f;
+      --danger: #ef4444;
+      --danger-subtle: rgba(239, 68, 68, 0.14);
+      --radius-sm: 8px;
+      --radius: 14px;
+      --radius-lg: 22px;
+      --shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+      --space-1: 4px;
+      --space-2: 8px;
+      --space-3: 12px;
+      --space-4: 16px;
+      --space-6: 24px;
+      --space-8: 32px;
+      --space-12: 48px;
+      --space-16: 64px;
+      --font-sans: "Prompt", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-display: "Cormorant Garamond", Georgia, serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: var(--font-sans);
+      background-color: var(--bg);
+      color: var(--ink);
+      line-height: 1.65;
+      min-height: 100vh;
+      overflow-x: hidden;
+      background-image:
+        radial-gradient(circle at 15% 10%, rgba(214, 178, 118, 0.09), transparent 40%),
+        radial-gradient(circle at 85% 22%, rgba(96, 122, 204, 0.07), transparent 42%);
+    }
+
+    button, input, select, textarea {
+      font: inherit;
+      color: inherit;
+    }
+
+    img, video {
+      max-width: 100%;
+      display: block;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 var(--space-6);
+    }
+
+    /* Header / Navbar */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      background: rgba(9, 10, 15, 0.82);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-4);
+      min-height: 72px;
+      flex-wrap: wrap;
+      padding-top: var(--space-2);
+      padding-bottom: var(--space-2);
+    }
+
+    .brand-btn {
+      background: none;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-3);
+      text-align: left;
+    }
+
+    .brand-mark {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: 1px solid var(--border-strong);
+      background: linear-gradient(135deg, rgba(214, 178, 118, 0.22), rgba(214, 178, 118, 0.03));
+      display: grid;
+      place-items: center;
+      color: var(--brand);
+      flex-shrink: 0;
+    }
+
+    .brand-name {
+      font-weight: 600;
+      font-size: 1.08rem;
+      letter-spacing: 0.03em;
+      color: var(--ink);
+    }
+
+    .nav-group {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      flex-wrap: wrap;
+    }
+
+    .nav-link {
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--ink-secondary);
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: 0.92rem;
+      cursor: pointer;
+      transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .nav-link:hover {
+      color: var(--ink);
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .nav-link:focus-visible,
+    .btn:focus-visible,
+    .filter-tab:focus-visible,
+    .admin-tab:focus-visible,
+    .work-card:focus-visible {
+      outline: 2px solid var(--brand);
+      outline-offset: 2px;
+    }
+
+    .mode-switch-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      padding: 8px 16px;
+      border-radius: 999px;
+      border: 1px solid var(--border-strong);
+      background: var(--brand-subtle);
+      color: var(--brand);
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background-color 0.2s ease, transform 0.15s ease, color 0.2s ease;
+    }
+
+    .mode-switch-btn:hover {
+      background: var(--brand);
+      color: var(--brand-ink);
+    }
+
+    .mode-switch-btn:active {
+      transform: scale(0.98);
+    }
+
+    .mode-switch-btn.is-active {
+      background: var(--brand);
+      color: var(--brand-ink);
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-2);
+      padding: 12px 24px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      font-weight: 500;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.15s ease;
+    }
+
+    .btn:active {
+      transform: translateY(1px);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #e0be86, #c69d5c);
+      color: var(--brand-ink);
+      font-weight: 600;
+      box-shadow: 0 8px 24px rgba(214, 178, 118, 0.24);
+    }
+
+    .btn-primary:hover {
+      background: linear-gradient(135deg, #ebd0a1, #d4ae6f);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.04);
+      border-color: var(--border);
+      color: var(--ink);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.09);
+      border-color: rgba(255, 255, 255, 0.22);
+    }
+
+    .btn-danger {
+      background: var(--danger-subtle);
+      border-color: rgba(239, 68, 68, 0.35);
+      color: #fca5a5;
+    }
+
+    .btn-danger:hover {
+      background: var(--danger);
+      color: #ffffff;
+    }
+
+    .btn-sm {
+      padding: 7px 14px;
+      font-size: 0.85rem;
+      border-radius: var(--radius-sm);
+    }
+
+    /* Hero Section */
+    .hero {
+      position: relative;
+      padding: var(--space-16) 0 var(--space-12);
+      overflow: hidden;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-12);
+      align-items: center;
+    }
+
+    @media (min-width: 920px) {
+      .hero {
+        padding: 88px 0 76px;
+      }
+      .hero-grid {
+        grid-template-columns: 1.15fr 0.85fr;
+      }
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--brand);
+      margin-bottom: var(--space-4);
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 28px;
+      height: 1px;
+      background: var(--brand);
+      display: inline-block;
+    }
+
+    .hero-title {
+      margin: 0 0 var(--space-4);
+      font-size: clamp(2.1rem, 4.6vw, 3.6rem);
+      line-height: 1.18;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+
+    .hero-subtitle {
+      margin: 0 0 var(--space-8);
+      font-size: clamp(1rem, 1.6vw, 1.14rem);
+      color: var(--ink-secondary);
+      max-width: 580px;
+      font-weight: 300;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-3);
+    }
+
+    /* Artistic Aperture Visual */
+    .hero-visual {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .visual-frame {
+      position: relative;
+      width: 100%;
+      max-width: 430px;
+      aspect-ratio: 4 / 5;
+      border-radius: var(--radius-lg);
+      background:
+        radial-gradient(circle at 50% 42%, rgba(214, 178, 118, 0.22), rgba(21, 24, 34, 0.92) 68%),
+        linear-gradient(160deg, #1b2030 0%, #0d0f17 100%);
+      border: 1px solid var(--border-strong);
+      box-shadow: var(--shadow);
+      padding: var(--space-6);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+    }
+
+    .visual-frame::after {
+      content: "";
+      position: absolute;
+      inset: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: 14px;
+      pointer-events: none;
+    }
+
+    .frame-corners {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.75rem;
+      letter-spacing: 0.14em;
+      color: var(--muted);
+      font-family: monospace;
+      z-index: 1;
+    }
+
+    .lens-art {
+      margin: auto;
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      border: 1px solid var(--border-strong);
+      display: grid;
+      place-items: center;
+      position: relative;
+      box-shadow: 0 0 60px rgba(214, 178, 118, 0.16);
+    }
+
+    .lens-art::before {
+      content: "";
+      position: absolute;
+      inset: 16px;
+      border-radius: 50%;
+      border: 1px dashed rgba(214, 178, 118, 0.35);
+    }
+
+    .lens-core {
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, rgba(235, 208, 161, 0.45), rgba(13, 15, 23, 0.95));
+      border: 1px solid rgba(214, 178, 118, 0.5);
+      display: grid;
+      place-items: center;
+      color: var(--brand);
+    }
+
+    .frame-caption {
+      z-index: 1;
+      text-align: center;
+    }
+
+    .frame-caption-serif {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: 1.35rem;
+      color: var(--brand);
+      letter-spacing: 0.03em;
+    }
+
+    /* Sections */
+    .section {
+      padding: var(--space-16) 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .section-header {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+      margin-bottom: var(--space-8);
+    }
+
+    @media (min-width: 768px) {
+      .section-header.row-between {
+        flex-direction: row;
+        align-items: flex-end;
+        justify-content: space-between;
+      }
+    }
+
+    .section-title {
+      margin: 0;
+      font-size: clamp(1.65rem, 3vw, 2.25rem);
+      font-weight: 600;
+    }
+
+    .section-desc {
+      margin: 0;
+      color: var(--muted);
+      max-width: 560px;
+      font-size: 0.98rem;
+    }
+
+    /* Services Grid */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: var(--space-6);
+    }
+
+    .service-card {
+      background: linear-gradient(180deg, rgba(28, 32, 45, 0.7) 0%, rgba(21, 24, 34, 0.9) 100%);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: var(--space-8) var(--space-6);
+      transition: border-color 0.25s ease, transform 0.25s ease;
+    }
+
+    .service-card:hover {
+      border-color: var(--border-strong);
+      transform: translateY(-3px);
+    }
+
+    .service-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: var(--brand-subtle);
+      border: 1px solid var(--border-strong);
+      color: var(--brand);
+      display: grid;
+      place-items: center;
+      margin-bottom: var(--space-4);
+    }
+
+    .service-title {
+      margin: 0 0 var(--space-2);
+      font-size: 1.2rem;
+      font-weight: 600;
+    }
+
+    .service-text {
+      margin: 0;
+      color: var(--ink-secondary);
+      font-size: 0.95rem;
+      font-weight: 300;
+    }
+
+    /* Filter Bar */
+    .filter-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-2);
+    }
+
+    .filter-tab {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--ink-secondary);
+      padding: 8px 18px;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .filter-tab:hover {
+      border-color: rgba(255, 255, 255, 0.25);
+      color: var(--ink);
+    }
+
+    .filter-tab.is-active {
+      background: var(--brand);
+      border-color: var(--brand);
+      color: var(--brand-ink);
+      font-weight: 600;
+    }
+
+    /* Portfolio Gallery */
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: var(--space-6);
+    }
+
+    .work-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      cursor: pointer;
+      text-align: left;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .work-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--border-strong);
+      box-shadow: var(--shadow);
+    }
+
+    .work-thumb {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      background: #0d0f16;
+      overflow: hidden;
+      display: grid;
+      place-items: center;
+    }
+
+    .work-thumb img,
+    .work-thumb video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .work-card:hover .work-thumb img,
+    .work-card:hover .work-thumb video {
+      transform: scale(1.04);
+    }
+
+    .work-placeholder-art {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-2);
+      color: var(--brand);
+      opacity: 0.75;
+    }
+
+    .work-body {
+      padding: var(--space-4) var(--space-6) var(--space-6);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+      flex: 1;
+    }
+
+    .work-category {
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--brand);
+      font-weight: 500;
+    }
+
+    .work-title {
+      margin: 0;
+      font-size: 1.14rem;
+      font-weight: 600;
+      color: var(--ink);
+    }
+
+    .work-desc {
+      margin: 0;
+      font-size: 0.9rem;
+      color: var(--muted);
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    /* Empty State */
+    .empty-state {
+      background: linear-gradient(180deg, rgba(21, 24, 34, 0.75), rgba(15, 17, 24, 0.9));
+      border: 1px dashed var(--border-strong);
+      border-radius: var(--radius-lg);
+      padding: var(--space-12) var(--space-6);
+      text-align: center;
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    .empty-icon {
+      width: 56px;
+      height: 56px;
+      margin: 0 auto var(--space-4);
+      border-radius: 50%;
+      background: var(--brand-subtle);
+      color: var(--brand);
+      display: grid;
+      place-items: center;
+    }
+
+    .empty-title {
+      margin: 0 0 var(--space-2);
+      font-size: 1.25rem;
+      font-weight: 600;
+    }
+
+    .empty-text {
+      margin: 0 0 var(--space-6);
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    /* Contact Section */
+    .contact-panel {
+      background: linear-gradient(145deg, rgba(28, 32, 45, 0.8), rgba(15, 17, 24, 0.95));
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-lg);
+      padding: var(--space-8);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: var(--space-6);
+      margin-top: var(--space-6);
+    }
+
+    .contact-item {
+      background: rgba(9, 10, 15, 0.55);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: var(--space-4) var(--space-6);
+    }
+
+    .contact-label {
+      font-size: 0.8rem;
+      color: var(--brand);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: var(--space-1);
+    }
+
+    .contact-value {
+      font-size: 1.02rem;
+      font-weight: 500;
+      word-break: break-word;
+    }
+
+    /* Footer */
+    .site-footer {
+      border-top: 1px solid var(--border);
+      padding: var(--space-8) 0;
+      color: var(--muted);
+      font-size: 0.88rem;
+      text-align: center;
+    }
+
+    /* Lightbox Modal */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 60;
+      background: rgba(5, 6, 10, 0.86);
+      backdrop-filter: blur(10px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-4);
+    }
+
+    .modal-backdrop[hidden],
+    .view-section[hidden] {
+      display: none !important;
+    }
+
+    .modal-card {
+      background: var(--surface);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-lg);
+      width: 100%;
+      max-width: 880px;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: var(--shadow);
+    }
+
+    .modal-media {
+      background: #050608;
+      max-height: 540px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .modal-media img,
+    .modal-media video {
+      max-height: 520px;
+      width: auto;
+      max-width: 100%;
+      object-fit: contain;
+    }
+
+    .modal-content {
+      padding: var(--space-6) var(--space-8);
+    }
+
+    .modal-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: var(--space-4);
+      margin-bottom: var(--space-3);
+    }
+
+    .modal-desc {
+      margin: 0;
+      color: var(--ink-secondary);
+      white-space: pre-line;
+    }
+
+    /* Back-office / Admin View */
+    .admin-wrapper {
+      padding: var(--space-8) 0 var(--space-16);
+    }
+
+    .admin-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-4);
+      margin-bottom: var(--space-6);
+      padding-bottom: var(--space-6);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .admin-tabs {
+      display: flex;
+      gap: var(--space-2);
+      margin-bottom: var(--space-6);
+      flex-wrap: wrap;
+    }
+
+    .admin-tab {
+      padding: 10px 20px;
+      border-radius: var(--radius-sm);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--ink-secondary);
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .admin-tab.is-active {
+      background: var(--brand);
+      border-color: var(--brand);
+      color: var(--brand-ink);
+    }
+
+    .admin-layout {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-8);
+      align-items: start;
+    }
+
+    @media (min-width: 960px) {
+      .admin-layout {
+        grid-template-columns: 420px 1fr;
+      }
+    }
+
+    .panel-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: var(--space-6);
+    }
+
+    .panel-title {
+      margin: 0 0 var(--space-4);
+      font-size: 1.2rem;
+      font-weight: 600;
+    }
+
+    .form-group {
+      margin-bottom: var(--space-4);
+    }
+
+    .form-label {
+      display: block;
+      font-size: 0.88rem;
+      font-weight: 500;
+      margin-bottom: var(--space-2);
+      color: var(--ink-secondary);
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 10px 14px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      background: var(--bg-alt);
+      color: var(--ink);
+      font-size: 0.95rem;
+      transition: border-color 0.2s ease;
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: var(--brand);
+    }
+
+    textarea.form-control {
+      min-height: 96px;
+      resize: vertical;
+    }
+
+    .form-hint {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-top: var(--space-1);
+    }
+
+    .form-error {
+      font-size: 0.84rem;
+      color: #fca5a5;
+      margin-top: var(--space-1);
+    }
+
+    .media-preview-box {
+      margin-top: var(--space-3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      background: var(--bg);
+      overflow: hidden;
+      max-height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .media-preview-box img,
+    .media-preview-box video {
+      max-height: 196px;
+      object-fit: contain;
+    }
+
+    .form-actions {
+      display: flex;
+      gap: var(--space-3);
+      flex-wrap: wrap;
+      margin-top: var(--space-6);
+    }
+
+    /* Admin Works List */
+    .admin-list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+    }
+
+    .admin-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-4);
+      padding: var(--space-4);
+      border-radius: var(--radius-sm);
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      flex-wrap: wrap;
+    }
+
+    .admin-item-info {
+      display: flex;
+      align-items: center;
+      gap: var(--space-4);
+      min-width: 220px;
+      flex: 1;
+    }
+
+    .admin-item-thumb {
+      width: 72px;
+      height: 52px;
+      border-radius: 6px;
+      background: var(--surface-elevated);
+      overflow: hidden;
+      flex-shrink: 0;
+      display: grid;
+      place-items: center;
+      color: var(--brand);
+    }
+
+    .admin-item-thumb img,
+    .admin-item-thumb video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .admin-item-title {
+      font-weight: 600;
+      margin: 0;
+      font-size: 0.98rem;
+    }
+
+    .admin-item-meta {
+      font-size: 0.82rem;
+      color: var(--brand);
+    }
+
+    .admin-item-actions {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      flex-wrap: wrap;
+    }
+
+    .settings-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-6);
+    }
+
+    @media (min-width: 768px) {
+      .settings-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    /* Search & Portfolio Controls */
+    .portfolio-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-4);
+      margin-bottom: var(--space-6);
+    }
+
+    .search-box {
+      position: relative;
+      flex: 1;
+      min-width: 240px;
+      max-width: 380px;
+    }
+
+    .search-box svg {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--muted);
+      pointer-events: none;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 9px 14px 9px 40px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--ink);
+      font-size: 0.9rem;
+      transition: border-color 0.2s ease;
+    }
+
+    .search-input:focus {
+      outline: none;
+      border-color: var(--brand);
+    }
+
+    /* Featured & Media Badges on Cards */
+    .work-badge-featured {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      z-index: 2;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(9, 10, 15, 0.82);
+      border: 1px solid var(--border-strong);
+      color: var(--brand);
+      font-size: 0.74rem;
+      font-weight: 500;
+      backdrop-filter: blur(6px);
+    }
+
+    .work-play-badge {
+      position: absolute;
+      right: 12px;
+      bottom: 12px;
+      z-index: 2;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(9, 10, 15, 0.78);
+      border: 1px solid var(--border-strong);
+      color: var(--brand);
+      display: grid;
+      place-items: center;
+      backdrop-filter: blur(6px);
+    }
+
+    .work-meta-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-2);
+      flex-wrap: wrap;
+    }
+
+    .work-client {
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    /* Lightbox Video Embed & Nav */
+    .embed-frame-wrap {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #050608;
+    }
+
+    .embed-frame-wrap iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
+    }
+
+    .modal-nav-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-3);
+      margin-top: var(--space-6);
+      padding-top: var(--space-4);
+      border-top: 1px solid var(--border);
+    }
+
+    /* Contact & Inquiry Split Layout */
+    .contact-split {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-8);
+      margin-top: var(--space-6);
+      align-items: start;
+    }
+
+    @media (min-width: 900px) {
+      .contact-split {
+        grid-template-columns: 1fr 1.1fr;
+      }
+    }
+
+    .inquiry-card {
+      background: rgba(9, 10, 15, 0.6);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: var(--space-6);
+    }
+
+    .inline-status {
+      padding: var(--space-3) var(--space-4);
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-strong);
+      background: var(--brand-subtle);
+      color: var(--brand-hover);
+      font-size: 0.9rem;
+      margin-top: var(--space-4);
+    }
+
+    /* Admin Auth Modal & Security */
+    .auth-card {
+      background: var(--surface);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-lg);
+      width: 100%;
+      max-width: 460px;
+      padding: var(--space-8);
+      box-shadow: var(--shadow);
+    }
+
+    .google-pill-box {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      padding: var(--space-3) var(--space-4);
+      border-radius: var(--radius-sm);
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border);
+      margin-bottom: var(--space-4);
+      font-size: 0.88rem;
+      color: var(--ink-secondary);
+    }
+
+    .auth-divider {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      color: var(--muted);
+      font-size: 0.8rem;
+      margin: var(--space-4) 0;
+    }
+
+    .auth-divider::before,
+    .auth-divider::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .admin-header-actions {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      flex-wrap: wrap;
+    }
+
+    .admin-user-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      padding: 7px 14px;
+      border-radius: 999px;
+      background: var(--brand-subtle);
+      border: 1px solid var(--border-strong);
+      color: var(--brand);
+      font-size: 0.85rem;
+    }
+
+    .checkbox-row {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      cursor: pointer;
+      font-size: 0.92rem;
+      color: var(--ink-secondary);
+    }
+
+    .checkbox-row input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--brand);
+      cursor: pointer;
+    }
+
+    .inquiry-item {
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: var(--space-4) var(--space-6);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+    }
+
+    .inquiry-item-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: var(--space-4);
+      flex-wrap: wrap;
+    }
+
+    .status-pill {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 0.76rem;
+      font-weight: 500;
+      border: 1px solid var(--border-strong);
+      background: var(--brand-subtle);
+      color: var(--brand);
+    }
+
+    .status-pill.is-done {
+      border-color: rgba(52, 211, 153, 0.4);
+      background: rgba(52, 211, 153, 0.12);
+      color: #6ee7b7;
+    }
+  </style>
+<style data-link-removed-style>a[data-link-removed],a[href*="zPythonSafez"]:not([onclick]){pointer-events:none!important;cursor:default!important;opacity:.6}</style></head>
+<body>
+
+  <!-- Top Navigation -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <button type="button" class="brand-btn" id="brandHomeBtn" aria-label="กลับสู่หน้าแรก">
+        <span class="brand-mark" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <circle cx="12" cy="12" r="9"></circle>
+            <circle cx="12" cy="12" r="3.5"></circle>
+            <path d="M14.5 9.5L19 5"></path>
+          </svg>
+        </span>
+        <span class="brand-name" id="headerBrandName">Visual Craft Portfolio</span>
+      </button>
+
+      <nav class="nav-group" aria-label="เมนูหลัก">
+        <div id="publicNavLinks" class="nav-group">
+          <button type="button" class="nav-link" data-scroll="heroSection">หน้าแรก</button>
+          <button type="button" class="nav-link" data-scroll="servicesSection">บริการ</button>
+          <button type="button" class="nav-link" data-scroll="portfolioSection">คลังผลงาน</button>
+          <button type="button" class="nav-link" data-scroll="contactSection">ติดต่องาน</button>
+        </div>
+        <button type="button" class="mode-switch-btn" id="toggleAdminBtn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"></path>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9c.26.604.852.997 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1Z"></path>
+          </svg>
+          <span id="toggleAdminLabel">ระบบหลังบ้าน</span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- PUBLIC PORTFOLIO VIEW -->
+  <main id="publicView" class="view-section">
+    <!-- Hero -->
+    <section id="heroSection" class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">Photography &amp; Video Production</div>
+          <h1 class="hero-title" id="heroTitleDisplay">ถ่ายทอดทุกเรื่องราวผ่านภาพถ่ายและงานตัดต่อวิดีโอระดับมืออาชีพ</h1>
+          <p class="hero-subtitle" id="heroSubtitleDisplay">พื้นที่รวบรวมผลงานภาพถ่าย งานตัดต่อวิดีโอ และโปรเจกต์สร้างสรรค์หลากหลายรูปแบบ เพื่อนำเสนอมุมมองและคุณภาพงานให้ลูกค้าได้สัมผัสอย่างชัดเจน</p>
+          <div class="hero-actions">
+            <button type="button" class="btn btn-primary" data-scroll="portfolioSection">ชมคลังผลงาน</button>
+            <button type="button" class="btn btn-secondary" data-scroll="servicesSection">ดูขอบเขตบริการ</button>
+          </div>
+        </div>
+
+        <div class="hero-visual" aria-hidden="true">
+          <div class="visual-frame">
+            <div class="frame-corners">
+              <span>RAW / 4K</span>
+              <span>PORTFOLIO</span>
+            </div>
+            <div class="lens-art">
+              <div class="lens-core">
+                <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"></path>
+                  <circle cx="12" cy="13" r="3.5"></circle>
+                </svg>
+              </div>
+            </div>
+            <div class="frame-caption">
+              <div class="frame-caption-serif">Visual Storytelling Archive</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services -->
+    <section id="servicesSection" class="section">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">บริการของเรา</h2>
+          <p class="section-desc">รองรับงานโปรดักชันตั้งแต่งานถ่ายภาพนิ่ง งานตัดต่อลำดับภาพ ไปจนถึงการรวบรวมงานสร้างสรรค์ครบวงจร</p>
+        </div>
+
+        <div class="services-grid">
+          <article class="service-card">
+            <div class="service-icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+                <circle cx="12" cy="13" r="4"></circle>
+              </svg>
+            </div>
+            <h3 class="service-title" id="srvPhotoTitle">บริการรับถ่ายภาพ</h3>
+            <p class="service-text" id="srvPhotoDesc">ถ่ายภาพบุคคล ภาพสินค้า อีเวนต์ ภาพบรรยากาศ และงานโฆษณา ด้วยการจัดแสงและองค์ประกอบภาพที่พิถีพิถัน</p>
+          </article>
+
+          <article class="service-card">
+            <div class="service-icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <polygon points="23 7 16 12 23 17 23 7"></polygon>
+                <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
+              </svg>
+            </div>
+            <h3 class="service-title" id="srvVideoTitle">บริการตัดต่อวิดีโอ</h3>
+            <p class="service-text" id="srvVideoDesc">ตัดต่อลำดับภาพ เกรดสี ปรับแต่งเสียง และจังหวะการเล่าเรื่อง สำหรับวิดีโอพรีเซนเทชัน โซเชียลมีเดีย และภาพยนตร์สั้น</p>
+          </article>
+
+          <article class="service-card">
+            <div class="service-icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+                <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                <polyline points="21 15 16 10 5 21"></polyline>
+              </svg>
+            </div>
+            <h3 class="service-title" id="srvOtherTitle">รวบรวมผลงานสร้างสรรค์</h3>
+            <p class="service-text" id="srvOtherDesc">จัดเก็บและนำเสนอผลงานสื่อผสม งานออกแบบกราฟิก และโปรเจกต์พิเศษต่าง ๆ เป็นหมวดหมู่ชัดเจนเพื่อให้ลูกค้าเลือกชมได้สะดวก</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Portfolio Showcase -->
+    <section id="portfolioSection" class="section">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">คลังผลงาน</h2>
+          <p class="section-desc">เลือกชมผลงานตามหมวดหมู่หรือค้นหาโปรเจกต์ที่สนใจ คลิกที่การ์ดเพื่อดูภาพหรือเล่นวิดีโอขนาดเต็ม</p>
+        </div>
+
+        <div class="portfolio-toolbar">
+          <div class="filter-tabs" role="tablist" aria-label="หมวดหมู่ผลงาน">
+            <button type="button" class="filter-tab is-active" data-filter="all">ทั้งหมด</button>
+            <button type="button" class="filter-tab" data-filter="featured">ผลงานเด่น</button>
+            <button type="button" class="filter-tab" data-filter="photo">ถ่ายภาพ</button>
+            <button type="button" class="filter-tab" data-filter="video">ตัดต่อวิดีโอ</button>
+            <button type="button" class="filter-tab" data-filter="other">ผลงานอื่น ๆ</button>
+          </div>
+
+          <div class="search-box">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <input type="search" id="portfolioSearchInput" class="search-input" placeholder="ค้นหาชื่อผลงาน ลูกค้า หรือรายละเอียด..." aria-label="ค้นหาผลงาน">
+          </div>
+        </div>
+
+        <div id="portfolioContainer"></div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contactSection" class="section">
+      <div class="container">
+        <div class="contact-panel">
+          <h2 class="section-title">ช่องทางติดต่องาน &amp; สอบถามคิวงาน</h2>
+          <p class="section-desc">สนใจจ้างงานถ่ายภาพ ตัดต่อวิดีโอ หรือสอบถามรายละเอียดโปรเจกต์ สามารถติดต่อตามช่องทางด้านล่างหรือส่งบรีฟงานถึงสตูดิโอได้ทันที</p>
+
+          <div class="contact-split">
+            <div>
+              <h3 class="panel-title" style="font-size: 1.08rem;">ข้อมูลติดต่อโดยตรง</h3>
+              <div id="contactContentArea"></div>
+            </div>
+
+            <div class="inquiry-card">
+              <h3 class="panel-title" style="font-size: 1.08rem;">ส่งรายละเอียดสอบถามคิวงาน / ขอใบเสนอราคา</h3>
+              <form id="inquiryForm" novalidate>
+                <div class="settings-grid" style="gap: 12px;">
+                  <div class="form-group" style="margin-bottom: 12px;">
+                    <label class="form-label" for="inqNameInput">ชื่อผู้ติดต่อ / บริษัท *</label>
+                    <input type="text" id="inqNameInput" class="form-control" placeholder="ระบุชื่อของคุณ" required>
+                    <div id="inqNameError" class="form-error" hidden>กรุณาระบุชื่อผู้ติดต่อ</div>
+                  </div>
+                  <div class="form-group" style="margin-bottom: 12px;">
+                    <label class="form-label" for="inqContactInput">เบอร์โทร / LINE / อีเมลติดต่อกลับ *</label>
+                    <input type="text" id="inqContactInput" class="form-control" placeholder="เช่น 08x-xxx-xxxx หรือ LINE ID" required>
+                    <div id="inqContactError" class="form-error" hidden>กรุณาระบุช่องทางติดต่อกลับ</div>
+                  </div>
+                </div>
+
+                <div class="settings-grid" style="gap: 12px;">
+                  <div class="form-group" style="margin-bottom: 12px;">
+                    <label class="form-label" for="inqServiceInput">ประเภทงานที่สนใจ</label>
+                    <select id="inqServiceInput" class="form-control">
+                      <option value="photo">บริการรับถ่ายภาพ</option>
+                      <option value="video">บริการตัดต่อวิดีโอ</option>
+                      <option value="both">ถ่ายภาพพร้อมตัดต่อวิดีโอครบวงจร</option>
+                      <option value="other">งานสร้างสรรค์อื่น ๆ</option>
+                    </select>
+                  </div>
+                  <div class="form-group" style="margin-bottom: 12px;">
+                    <label class="form-label" for="inqDateInput">ช่วงวันที่ต้องการใช้งาน (ถ้ามี)</label>
+                    <input type="text" id="inqDateInput" class="form-control" placeholder="เช่น 15 พ.ค. หรือ ภายในเดือนหน้า">
+                  </div>
+                </div>
+
+                <div class="form-group" style="margin-bottom: 12px;">
+                  <label class="form-label" for="inqMessageInput">รายละเอียดงาน / ขอบเขตโปรเจกต์ *</label>
+                  <textarea id="inqMessageInput" class="form-control" style="min-height: 84px;" placeholder="ระบุรูปแบบงาน สถานที่ หรือลิงก์เรฟเฟอเรนซ์เบื้องต้น..." required></textarea>
+                  <div id="inqMessageError" class="form-error" hidden>กรุณาระบุรายละเอียดงานเบื้องต้น</div>
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="width: 100%;">ส่งข้อมูลติดต่องาน</button>
+                <div id="inquirySuccessNotice" class="inline-status" hidden>ส่งข้อมูลติดต่องานเรียบร้อยแล้ว แอดมินสามารถตรวจสอบข้อความได้ในระบบหลังบ้าน</div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- BACK-OFFICE / ADMIN VIEW -->
+  <section id="adminView" class="view-section" hidden>
+    <div class="container admin-wrapper">
+      <div class="admin-header">
+        <div>
+          <h1 class="section-title">ระบบหลังบ้านจัดการพอร์ตโฟลิโอ</h1>
+          <p class="section-desc">เพิ่ม แก้ไข จัดเรียงผลงาน ตรวจสอบคำขอจ้างงาน และอัปเดตข้อมูลหน้าเว็บ</p>
+        </div>
+        <div class="admin-header-actions">
+          <span class="admin-user-chip" id="adminSessionEmailChip">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            <span id="adminEmailLabel">แอดมิน</span>
+          </span>
+          <button type="button" class="btn btn-secondary btn-sm" id="backToPublicBtn">ดูหน้าเว็บไซต์มุมมองลูกค้า</button>
+          <button type="button" class="btn btn-danger btn-sm" id="adminLogoutBtn">ออกจากระบบ</button>
+        </div>
+      </div>
+
+      <div class="admin-tabs">
+        <button type="button" class="admin-tab is-active" data-admintab="works">จัดการผลงาน</button>
+        <button type="button" class="admin-tab" data-admintab="inquiries">ข้อความติดต่องาน</button>
+        <button type="button" class="admin-tab" data-admintab="settings">ตั้งค่าข้อมูลหน้าเว็บ</button>
+        <button type="button" class="admin-tab" data-admintab="security">บัญชีแอดมิน (Google)</button>
+      </div>
+
+      <!-- Tab 1: Manage Works -->
+      <div id="adminWorksPane" class="admin-layout">
+        <div class="panel-card">
+          <h2 class="panel-title" id="workFormHeading">เพิ่มผลงานใหม่</h2>
+          <form id="workForm" novalidate>
+            <input type="hidden" id="workEditId" value="">
+
+            <div class="form-group">
+              <label class="form-label" for="workTitleInput">ชื่อผลงาน *</label>
+              <input type="text" id="workTitleInput" class="form-control" placeholder="เช่น ภาพถ่ายแฟชั่นชุดฤดูร้อน หรือ วิดีโอโฆษณาเปิดตัวสินค้า" required>
+              <div id="workTitleError" class="form-error" hidden>กรุณาระบุชื่อผลงาน</div>
+            </div>
+
+            <div class="settings-grid" style="gap: 12px;">
+              <div class="form-group">
+                <label class="form-label" for="workCategoryInput">หมวดหมู่ผลงาน</label>
+                <select id="workCategoryInput" class="form-control">
+                  <option value="photo">ถ่ายภาพ</option>
+                  <option value="video">ตัดต่อวิดีโอ</option>
+                  <option value="other">ผลงานอื่น ๆ</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="workClientInput">ชื่อลูกค้า / ปีโปรเจกต์ (ถ้ามี)</label>
+                <input type="text" id="workClientInput" class="form-control" placeholder="เช่น แบรนด์สินค้า / 2025">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="workFileInput">อัปโหลดไฟล์รูปภาพจากเครื่อง</label>
+              <input type="file" id="workFileInput" class="form-control" accept="image/*">
+              <div class="form-hint">รองรับไฟล์ภาพ (ระบบย่อขนาดอัตโนมัติเพื่อความรวดเร็วในการแสดงผล)</div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="workUrlInput">หรือวางลิงก์รูปภาพ / วิดีโอ / YouTube / Vimeo</label>
+              <input type="url" id="workUrlInput" class="form-control" placeholder="https://... (.jpg, .mp4, YouTube หรือ Vimeo)">
+              <div class="form-hint">รองรับลิงก์ภาพ, ไฟล์วิดีโอ .mp4/.webm รวมถึงลิงก์ YouTube และ Vimeo เพื่อเล่นในพอร์ตโฟลิโอ</div>
+            </div>
+
+            <div id="formMediaPreview" class="media-preview-box" hidden></div>
+
+            <div class="form-group" style="margin-top: 16px;">
+              <label class="form-label" for="workDescInput">รายละเอียดผลงาน</label>
+              <textarea id="workDescInput" class="form-control" placeholder="อธิบายแนวคิด เทคนิคที่ใช้ หรือขอบเขตงานที่รับผิดชอบ..."></textarea>
+            </div>
+
+            <div class="form-group">
+              <label class="checkbox-row">
+                <input type="checkbox" id="workFeaturedInput">
+                <span>ปักหมุดเป็นผลงานเด่น (แสดงป้าย Featured และดูได้ในหมวดผลงานเด่น)</span>
+              </label>
+            </div>
+
+            <div class="form-actions">
+              <button type="submit" class="btn btn-primary" id="saveWorkBtn">บันทึกผลงาน</button>
+              <button type="button" class="btn btn-secondary" id="cancelEditBtn" hidden>ยกเลิกการแก้ไข</button>
+            </div>
+          </form>
+        </div>
+
+        <div class="panel-card">
+          <h2 class="panel-title">รายการผลงานทั้งหมด</h2>
+          <div id="adminWorksList"></div>
+        </div>
+      </div>
+
+      <!-- Tab 2: Client Inquiries -->
+      <div id="adminInquiriesPane" hidden>
+        <div class="panel-card">
+          <h2 class="panel-title">ข้อความสอบถามคิวงานจากลูกค้า</h2>
+          <p class="section-desc" style="margin-bottom: 20px;">รายการข้อความที่ลูกค้าส่งผ่านแบบฟอร์มติดต่องานหน้าเว็บไซต์</p>
+          <div id="adminInquiriesList"></div>
+        </div>
+      </div>
+
+      <!-- Tab 3: Site Settings -->
+      <div id="adminSettingsPane" hidden>
+        <form id="settingsForm" class="panel-card" novalidate>
+          <h2 class="panel-title">ข้อมูลแบรนด์และหน้าแรก</h2>
+          <div class="settings-grid">
+            <div class="form-group">
+              <label class="form-label" for="setBrandName">ชื่อสตูดิโอ / ชื่อพอร์ตโฟลิโอ</label>
+              <input type="text" id="setBrandName" class="form-control">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="setHeroTitle">หัวข้อหลักหน้าแรก (Hero Title)</label>
+              <input type="text" id="setHeroTitle" class="form-control">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="setHeroSubtitle">คำอธิบายหน้าแรก (Subtitle)</label>
+            <textarea id="setHeroSubtitle" class="form-control"></textarea>
+          </div>
+
+          <h2 class="panel-title" style="margin-top: 24px;">รายละเอียดบริการทั้ง 3 หมวด</h2>
+          <div class="settings-grid">
+            <div class="form-group">
+              <label class="form-label" for="setSrvPhotoDesc">คำอธิบาย: บริการรับถ่ายภาพ</label>
+              <textarea id="setSrvPhotoDesc" class="form-control"></textarea>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="setSrvVideoDesc">คำอธิบาย: บริการตัดต่อวิดีโอ</label>
+              <textarea id="setSrvVideoDesc" class="form-control"></textarea>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="setSrvOtherDesc">คำอธิบาย: รวบรวมผลงานสร้างสรรค์</label>
+            <textarea id="setSrvOtherDesc" class="form-control"></textarea>
+          </div>
+
+          <h2 class="panel-title" style="margin-top: 24px;">ช่องทางติดต่องานสำหรับลูกค้า</h2>
+          <div class="settings-grid">
+            <div class="form-group">
+              <label class="form-label" for="setPhone">เบอร์โทรศัพท์</label>
+              <input type="text" id="setPhone" class="form-control" placeholder="ระบุเบอร์โทรศัพท์ของคุณ">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="setLine">LINE ID</label>
+              <input type="text" id="setLine" class="form-control" placeholder="ระบุ LINE ID">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="setEmail">อีเมล</label>
+              <input type="email" id="setEmail" class="form-control" placeholder="ระบุอีเมลติดต่องาน">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="setLocation">สถานที่รับงาน / เวลาทำการ</label>
+              <input type="text" id="setLocation" class="form-control" placeholder="เช่น กรุงเทพฯ และปริมณฑล / รับงานทั่วประเทศ">
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary" id="saveSettingsBtn">บันทึกข้อมูลหน้าเว็บ</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Tab 4: Admin Account & Google Sign-In Config -->
+      <div id="adminSecurityPane" hidden>
+        <form id="securityForm" class="panel-card" novalidate>
+          <h2 class="panel-title">ตั้งค่าบัญชี Google แอดมิน &amp; การเข้าสู่ระบบ</h2>
+          <p class="section-desc" style="margin-bottom: 20px;">กำหนดอีเมลบัญชี Google ที่มีสิทธิ์เข้าจัดการหลังบ้านเพียงผู้เดียว พร้อมรหัสผ่านสำรองและตัวเลือกเชื่อมต่อ Google Identity Services</p>
+
+          <div class="settings-grid">
+            <div class="form-group">
+              <label class="form-label" for="secAdminEmail">อีเมล Google แอดมินที่ได้รับอนุญาต *</label>
+              <input type="email" id="secAdminEmail" class="form-control" placeholder="yourname@gmail.com" required>
+              <div id="secEmailError" class="form-error" hidden>กรุณาระบุอีเมลแอดมินให้ถูกต้อง</div>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="secNewPasscode">เปลี่ยนรหัสผ่านเข้าหลังบ้าน (เว้นว่างหากไม่ต้องการเปลี่ยน)</label>
+              <input type="password" id="secNewPasscode" class="form-control" placeholder="กำหนดรหัสผ่านใหม่อย่างน้อย 4 ตัวอักษร">
+              <div id="secPassError" class="form-error" hidden>รหัสผ่านต้องมีอย่างน้อย 4 ตัวอักษร</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="secGoogleClientId">Google OAuth Client ID (ตัวเลือกเสริมเมื่อนำไฟล์ไปโฮสต์บนโดเมนจริง)</label>
+            <input type="text" id="secGoogleClientId" class="form-control" placeholder="เช่น 1234567890-abc.apps.googleusercontent.com">
+            <div class="form-hint">ในหน้าต่างพรีวิวนี้ไม่มีเซิร์ฟเวอร์ภายนอก ระบบจึงตรวจสอบสิทธิ์ด้วยอีเมล Google แอดมินคู่กับรหัสผ่านที่คุณตั้งไว้ หากคุณดาวน์โหลดไฟล์เว็บไปรันบนโดเมนที่ลงทะเบียนใน Google Cloud Console สามารถวาง Client ID ที่นี่เพื่อเปิดปุ่ม Sign in with Google จริงตรวจสอบตรงกับอีเมลแอดมินด้านบนได้ทันที</div>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary">บันทึกการตั้งค่าแอดมิน</button>
+          </div>
+          <div id="securitySavedNotice" class="inline-status" hidden>อัปเดตข้อมูลสิทธิ์บัญชีแอดมินเรียบร้อยแล้ว</div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Lightbox Detail Modal -->
+  <div id="lightboxModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modalWorkTitle" hidden>
+    <div class="modal-card">
+      <div class="modal-media" id="modalMediaContainer"></div>
+      <div class="modal-content">
+        <div class="modal-top">
+          <div>
+            <div class="work-meta-row">
+              <span class="work-category" id="modalWorkCategory"></span>
+              <span class="work-client" id="modalWorkClient"></span>
+            </div>
+            <h3 class="section-title" id="modalWorkTitle" style="font-size: 1.5rem; margin-top: 4px;"></h3>
+          </div>
+          <button type="button" class="btn btn-secondary btn-sm" id="closeModalBtn">ปิดหน้าต่าง</button>
+        </div>
+        <p class="modal-desc" id="modalWorkDesc"></p>
+
+        <div class="modal-nav-bar" id="modalNavBar" hidden>
+          <button type="button" class="btn btn-secondary btn-sm" id="prevWorkBtn">&larr; ผลงานก่อนหน้า</button>
+          <button type="button" class="btn btn-secondary btn-sm" id="nextWorkBtn">ผลงานถัดไป &rarr;</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Admin Authentication Modal (Google Email Admin Gate) -->
+  <div id="authModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="authModalTitle" hidden>
+    <div class="auth-card">
+      <div style="display:flex; align-items:flex-start; justify-content:space-between; gap: 12px; margin-bottom: 12px;">
+        <div>
+          <div class="work-category">Admin Access</div>
+          <h2 class="panel-title" id="authModalTitle" style="margin: 4px 0 0; font-size: 1.35rem;">เข้าสู่ระบบแอดมิน</h2>
+        </div>
+        <button type="button" class="btn btn-secondary btn-sm" id="closeAuthModalBtn">ปิด</button>
+      </div>
+
+      <p class="section-desc" id="authModalDesc" style="font-size: 0.9rem; margin-bottom: 16px;"></p>
+
+      <!-- Real Google Identity Services Button Area (shown when Client ID is configured) -->
+      <div id="googleSignInArea" hidden>
+        <div id="g_id_signin_btn" style="display:flex; justify-content:center; margin-bottom: 8px;"></div>
+        <div id="googleGisHint" class="form-hint" style="text-align:center;">ระบบจะอนุญาตเฉพาะบัญชี Google ที่ตรงกับอีเมลแอดมินเท่านั้น</div>
+        <div class="auth-divider">หรือเข้าสู่ระบบด้วยรหัสผ่านแอดมิน</div>
+      </div>
+
+      <div id="previewAuthNote" class="google-pill-box">
+        <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" style="flex-shrink:0;">
+          <path fill="#EA4335" d="M12 5c1.6 0 3 .6 4.1 1.7l3.1-3.1C17.3 1.8 14.8 1 12 1 7.4 1 3.5 3.6 1.6 7.4l3.7 2.8C6.2 7.2 8.9 5 12 5z"/>
+          <path fill="#4285F4" d="M23.5 12.3c0-.8-.1-1.6-.2-2.3H12v4.5h6.5c-.3 1.5-1.1 2.8-2.4 3.6l3.7 2.9c2.2-2 3.7-5 3.7-8.7z"/>
+          <path fill="#FBBC05" d="M5.3 14.8c-.2-.8-.4-1.6-.4-2.5s.2-1.7.4-2.5L1.6 7C.6 9 0 11.2 0 13.5s.6 4.5 1.6 6.5l3.7-2.9z"/>
+          <path fill="#34A853" d="M12 23c3.2 0 6-1.1 8-3l-3.7-2.9c-1.1.7-2.5 1.2-4.3 1.2-3.1 0-5.8-2.1-6.7-5l-3.7 2.9C3.5 20.4 7.4 23 12 23z"/>
+        </svg>
+        <span id="previewAuthNoteText">ยืนยันตัวตนด้วยอีเมลบัญชี Google ของแอดมินคู่กับรหัสผ่าน (ทำงานบนเบราว์เซอร์โดยไม่ต้องพึ่งเซิร์ฟเวอร์ภายนอก)</span>
+      </div>
+
+      <form id="authForm" novalidate>
+        <div class="form-group">
+          <label class="form-label" for="authEmailInput">อีเมลบัญชี Google แอดมิน *</label>
+          <input type="email" id="authEmailInput" class="form-control" placeholder="yourname@gmail.com" autocomplete="username" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="authPassInput" id="authPassLabel">รหัสผ่านแอดมิน *</label>
+          <input type="password" id="authPassInput" class="form-control" placeholder="กรอกรหัสผ่านแอดมิน" autocomplete="current-password" required>
+        </div>
+
+        <div id="authErrorMsg" class="form-error" hidden></div>
+
+        <div class="form-actions" style="margin-top: 20px;">
+          <button type="submit" class="btn btn-primary" id="authSubmitBtn" style="width: 100%;">เข้าสู่ระบบจัดการหลังบ้าน</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container">
+      <span id="footerBrandText">Visual Craft Portfolio</span> &mdash; พอร์ตโฟลิโอภาพถ่าย งานตัดต่อวิดีโอ และผลงานสร้างสรรค์
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var STORAGE_KEY = 'visual_portfolio_cms_v1';
+      var SESSION_AUTH_KEY = 'visual_portfolio_admin_session_v1';
+
+      var CATEGORY_LABELS = {
+        photo: 'ถ่ายภาพ',
+        video: 'ตัดต่อวิดีโอ',
+        other: 'ผลงานอื่น ๆ'
+      };
+
+      var SERVICE_INQUIRY_LABELS = {
+        photo: 'บริการรับถ่ายภาพ',
+        video: 'บริการตัดต่อวิดีโอ',
+        both: 'ถ่ายภาพพร้อมตัดต่อวิดีโอครบวงจร',
+        other: 'งานสร้างสรรค์อื่น ๆ'
+      };
+
+      var defaultState = {
+        settings: {
+          brandName: 'Visual Craft Portfolio',
+          heroTitle: 'ถ่ายทอดทุกเรื่องราวผ่านภาพถ่ายและงานตัดต่อวิดีโอระดับมืออาชีพ',
+          heroSubtitle: 'พื้นที่รวบรวมผลงานภาพถ่าย งานตัดต่อวิดีโอ และโปรเจกต์สร้างสรรค์หลากหลายรูปแบบ เพื่อนำเสนอมุมมองและคุณภาพงานให้ลูกค้าได้สัมผัสอย่างชัดเจน',
+          srvPhotoDesc: 'ถ่ายภาพบุคคล ภาพสินค้า อีเวนต์ ภาพบรรยากาศ และงานโฆษณา ด้วยการจัดแสงและองค์ประกอบภาพที่พิถีพิถัน',
+          srvVideoDesc: 'ตัดต่อลำดับภาพ เกรดสี ปรับแต่งเสียง และจังหวะการเล่าเรื่อง สำหรับวิดีโอพรีเซนเทชัน โซเชียลมีเดีย และภาพยนตร์สั้น',
+          srvOtherDesc: 'จัดเก็บและนำเสนอผลงานสื่อผสม งานออกแบบกราฟิก และโปรเจกต์พิเศษต่าง ๆ เป็นหมวดหมู่ชัดเจนเพื่อให้ลูกค้าเลือกชมได้สะดวก',
+          phone: '',
+          line: '',
+          email: '',
+          location: ''
+        },
+        auth: {
+          adminEmail: '',
+          passcodeHash: '',
+          googleClientId: ''
+        },
+        works: [],
+        inquiries: []
+      };
+
+      var state = loadState();
+      var currentFilter = 'all';
+      var searchQuery = '';
+      var isAdminMode = false;
+      var isAdminAuthenticated = loadSessionAuth();
+      var pendingAdminTab = 'works';
+      var uploadedDataUrl = '';
+      var pendingDeleteId = null;
+      var pendingDeleteInquiryId = null;
+      var activeLightboxWorkId = null;
+      var gisLoadedClientId = '';
+
+      function hashCredentials(email, passcode) {
+        var str = String(email || '').trim().toLowerCase() + '::vc_cms::' + String(passcode || '');
+        var h1 = 0xdeadbeef ^ str.length;
+        var h2 = 0x41c6ce57 ^ str.length;
+        for (var i = 0; i < str.length; i++) {
+          var ch = str.charCodeAt(i);
+          h1 = Math.imul(h1 ^ ch, 2654435761);
+          h2 = Math.imul(h2 ^ ch, 1597334677);
+        }
+        h1 = Math.imul(h1 ^ (h1 >>> 16), 2246822507) ^ Math.imul(h2 ^ (h2 >>> 13), 3266489909);
+        h2 = Math.imul(h2 ^ (h2 >>> 16), 2246822507) ^ Math.imul(h1 ^ (h1 >>> 13), 3266489909);
+        return (h2 >>> 0).toString(16).padStart(8, '0') + (h1 >>> 0).toString(16).padStart(8, '0');
+      }
+
+      function loadSessionAuth() {
+        try {
+          var savedEmail = sessionStorage.getItem(SESSION_AUTH_KEY);
+          if (savedEmail && state && state.auth && state.auth.adminEmail) {
+            return savedEmail.toLowerCase() === state.auth.adminEmail.toLowerCase();
+          }
+        } catch (e) {
+          // Ignore sandbox sessionStorage restriction
+        }
+        return false;
+      }
+
+      function saveSessionAuth(authenticated) {
+        isAdminAuthenticated = authenticated;
+        try {
+          if (authenticated && state.auth.adminEmail) {
+            sessionStorage.setItem(SESSION_AUTH_KEY, state.auth.adminEmail);
+          } else {
+            sessionStorage.removeItem(SESSION_AUTH_KEY);
+          }
+        } catch (e) {
+          // Best-effort session persistence
+        }
+      }
+
+      function loadState() {
+        try {
+          var raw = localStorage.getItem(STORAGE_KEY);
+          if (raw) {
+            var parsed = JSON.parse(raw);
+            return {
+              settings: Object.assign({}, defaultState.settings, parsed.settings || {}),
+              auth: Object.assign({}, defaultState.auth, parsed.auth || {}),
+              works: Array.isArray(parsed.works) ? parsed.works : [],
+              inquiries: Array.isArray(parsed.inquiries) ? parsed.inquiries : []
+            };
+          }
+        } catch (e) {
+          // Fallback to in-memory default state when sandboxed storage is restricted
+        }
+        return JSON.parse(JSON.stringify(defaultState));
+      }
+
+      function saveState() {
+        try {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+        } catch (e) {
+          // Best-effort persistence
+        }
+      }
+
+      function isVideoMedia(url) {
+        if (!url) return false;
+        return /\.(mp4|webm|ogg|mov)(\?.*)?$/i.test(url.trim()) || /^data:video\//i.test(url.trim());
+      }
+
+      function parseEmbedVideo(url) {
+        if (!url) return null;
+        var trimmed = url.trim();
+        var ytMatch = trimmed.match(/(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([A-Za-z0-9_-]{11})/);
+        if (ytMatch && ytMatch[1]) {
+          return {
+            provider: 'youtube',
+            id: ytMatch[1],
+            embedUrl: 'about:invalid#zPythonSafez' + ytMatch[1] + '?rel=0',
+            thumbUrl: 'about:invalid#zPythonSafez' + ytMatch[1] + '/hqdefault.jpg'
+          };
+        }
+        var vimeoMatch = trimmed.match(/(?:vimeo\.com\/|player\.vimeo\.com\/video\/)(\d{6,12})/);
+        if (vimeoMatch && vimeoMatch[1]) {
+          return {
+            provider: 'vimeo',
+            id: vimeoMatch[1],
+            embedUrl: 'about:invalid#zPythonSafez' + vimeoMatch[1],
+            thumbUrl: ''
+          };
+        }
+        return null;
+      }
+
+      function isValidEmail(email) {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(email || '').trim());
+      }
+
+      function escapeHtml(str) {
+        return String(str || '')
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#39;');
+      }
+
+      function getFilteredWorks() {
+        var q = searchQuery.trim().toLowerCase();
+        return state.works.filter(function (w) {
+          var matchFilter = false;
+          if (currentFilter === 'all') {
+            matchFilter = true;
+          } else if (currentFilter === 'featured') {
+            matchFilter = Boolean(w.featured);
+          } else {
+            matchFilter = w.category === currentFilter;
+          }
+          if (!matchFilter) return false;
+          if (!q) return true;
+          var haystack = [w.title || '', w.description || '', w.client || '', CATEGORY_LABELS[w.category] || ''].join(' ').toLowerCase();
+          return haystack.indexOf(q) !== -1;
+        });
+      }
+
+      // Render site settings in Public View
+      function renderSettings() {
+        var s = state.settings;
+        document.getElementById('headerBrandName').textContent = s.brandName || defaultState.settings.brandName;
+        document.getElementById('footerBrandText').textContent = s.brandName || defaultState.settings.brandName;
+        document.getElementById('heroTitleDisplay').textContent = s.heroTitle || defaultState.settings.heroTitle;
+        document.getElementById('heroSubtitleDisplay').textContent = s.heroSubtitle || defaultState.settings.heroSubtitle;
+        document.getElementById('srvPhotoDesc').textContent = s.srvPhotoDesc || defaultState.settings.srvPhotoDesc;
+        document.getElementById('srvVideoDesc').textContent = s.srvVideoDesc || defaultState.settings.srvVideoDesc;
+        document.getElementById('srvOtherDesc').textContent = s.srvOtherDesc || defaultState.settings.srvOtherDesc;
+
+        var contactArea = document.getElementById('contactContentArea');
+        var items = [];
+        if (s.phone && s.phone.trim()) items.push({ label: 'เบอร์โทรศัพท์', value: s.phone.trim() });
+        if (s.line && s.line.trim()) items.push({ label: 'LINE ID', value: s.line.trim() });
+        if (s.email && s.email.trim()) items.push({ label: 'อีเมล', value: s.email.trim() });
+        if (s.location && s.location.trim()) items.push({ label: 'ขอบเขตการรับงาน', value: s.location.trim() });
+
+        if (items.length === 0) {
+          contactArea.innerHTML =
+            '<div class="empty-state" style="margin-top: 12px; padding: 28px 20px;">' +
+              '<p class="empty-title" style="font-size: 1.08rem;">ยังไม่ได้ระบุข้อมูลติดต่อโดยตรง</p>' +
+              '<p class="empty-text" style="margin-bottom: 16px;">แอดมินสามารถเพิ่มเบอร์โทร LINE ID และอีเมลได้ในระบบหลังบ้าน หรือให้ลูกค้ากรอกฟอร์มสอบถามคิวงานด้านข้างได้ทันที</p>' +
+              '<button type="button" class="btn btn-secondary btn-sm" id="setupContactBtn">ตั้งค่าช่องทางติดต่อ (สำหรับแอดมิน)</button>' +
+            '</div>';
+          var setupBtn = document.getElementById('setupContactBtn');
+          if (setupBtn) {
+            setupBtn.addEventListener('click', function () {
+              requestAdminAccess('settings');
+            });
+          }
+        } else {
+          var html = '<div class="contact-grid" style="margin-top: 12px;">';
+          items.forEach(function (item) {
+            html +=
+              '<div class="contact-item">' +
+                '<div class="contact-label">' + escapeHtml(item.label) + '</div>' +
+                '<div class="contact-value">' + escapeHtml(item.value) + '</div>' +
+              '</div>';
+          });
+          html += '</div>';
+          contactArea.innerHTML = html;
+        }
+      }
+
+      // Render Portfolio Gallery in Public View
+      function renderPortfolio() {
+        var container = document.getElementById('portfolioContainer');
+        var filtered = getFilteredWorks();
+
+        if (filtered.length === 0) {
+          var emptyMsg = state.works.length === 0
+            ? 'เริ่มต้นสร้างคลังพอร์ตโฟลิโอของคุณ โดยเข้าสู่ระบบแอดมินเพื่อเพิ่มผลงานภาพถ่าย งานตัดต่อวิดีโอ หรือโปรเจกต์สร้างสรรค์ต่าง ๆ'
+            : 'ไม่พบรายการผลงานที่ตรงกับหมวดหมู่หรือคำค้นหาที่เลือก ลองเปลี่ยนคำค้นหาหรือสลับดูหมวดหมู่อื่น';
+
+          container.innerHTML =
+            '<div class="empty-state">' +
+              '<div class="empty-icon" aria-hidden="true">' +
+                '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">' +
+                  '<rect x="3" y="3" width="18" height="18" rx="2"></rect>' +
+                  '<line x1="12" y1="8" x2="12" y2="16"></line>' +
+                  '<line x1="8" y1="12" x2="16" y2="12"></line>' +
+                '</svg>' +
+              '</div>' +
+              '<h3 class="empty-title">ยังไม่มีผลงานที่แสดงในขณะนี้</h3>' +
+              '<p class="empty-text">' + escapeHtml(emptyMsg) + '</p>' +
+              (state.works.length === 0
+                ? '<button type="button" class="btn btn-primary" id="emptyAddWorkBtn">เข้าสู่ระบบแอดมินเพื่อเพิ่มผลงาน</button>'
+                : '') +
+            '</div>';
+
+          var addBtn = document.getElementById('emptyAddWorkBtn');
+          if (addBtn) {
+            addBtn.addEventListener('click', function () {
+              requestAdminAccess('works');
+            });
+          }
+          return;
+        }
+
+        var playIconSvg =
+          '<div class="work-play-badge" aria-hidden="true">' +
+            '<svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">' +
+              '<polygon points="6 4 20 12 6 20 6 4"></polygon>' +
+            '</svg>' +
+          '</div>';
+
+        var gridHtml = '<div class="portfolio-grid">';
+        filtered.forEach(function (work) {
+          var catLabel = CATEGORY_LABELS[work.category] || CATEGORY_LABELS.other;
+          var embed = parseEmbedVideo(work.mediaUrl);
+          var isDirectVid = isVideoMedia(work.mediaUrl);
+          var thumbContent = '';
+
+          if (work.featured) {
+            thumbContent += '<span class="work-badge-featured">ผลงานเด่น</span>';
+          }
+
+          if (embed) {
+            if (embed.thumbUrl) {
+              thumbContent += '<img src="' + escapeHtml(embed.thumbUrl) + '" alt="' + escapeHtml(work.title) + '" loading="lazy">';
+            } else {
+              thumbContent +=
+                '<div class="work-placeholder-art">' +
+                  '<svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">' +
+                    '<polygon points="23 7 16 12 23 17 23 7"></polygon>' +
+                    '<rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>' +
+                  '</svg>' +
+                  '<span style="font-size:0.8rem;">วิดีโอออนไลน์</span>' +
+                '</div>';
+            }
+            thumbContent += playIconSvg;
+          } else if (work.mediaUrl) {
+            if (isDirectVid) {
+              thumbContent += '<video src="' + escapeHtml(work.mediaUrl) + '" muted playsinline preload="metadata"></video>' + playIconSvg;
+            } else {
+              thumbContent += '<img src="' + escapeHtml(work.mediaUrl) + '" alt="' + escapeHtml(work.title) + '" loading="lazy">';
+            }
+          } else {
+            thumbContent +=
+              '<div class="work-placeholder-art">' +
+                '<svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">' +
+                  '<rect x="3" y="3" width="18" height="18" rx="2"></rect>' +
+                  '<circle cx="8.5" cy="8.5" r="1.5"></circle>' +
+                  '<polyline points="21 15 16 10 5 21"></polyline>' +
+                '</svg>' +
+                '<span style="font-size:0.8rem;">' + escapeHtml(catLabel) + '</span>' +
+              '</div>';
+          }
+
+          gridHtml +=
+            '<button type="button" class="work-card" data-workid="' + escapeHtml(work.id) + '">' +
+              '<div class="work-thumb">' + thumbContent + '</div>' +
+              '<div class="work-body">' +
+                '<div class="work-meta-row">' +
+                  '<span class="work-category">' + escapeHtml(catLabel) + '</span>' +
+                  (work.client ? '<span class="work-client">' + escapeHtml(work.client) + '</span>' : '') +
+                '</div>' +
+                '<h3 class="work-title">' + escapeHtml(work.title) + '</h3>' +
+                (work.description ? '<p class="work-desc">' + escapeHtml(work.description) + '</p>' : '') +
+              '</div>' +
+            '</button>';
+        });
+        gridHtml += '</div>';
+        container.innerHTML = gridHtml;
+
+        container.querySelectorAll('.work-card').forEach(function (card) {
+          card.addEventListener('click', function () {
+            openLightbox(card.getAttribute('data-workid'));
+          });
+        });
+      }
+
+      // Render Back-office Works List
+      function renderAdminWorks() {
+        var listEl = document.getElementById('adminWorksList');
+        if (state.works.length === 0) {
+          listEl.innerHTML =
+            '<div class="empty-state" style="padding: 36px 20px;">' +
+              '<p class="empty-title">ยังไม่มีรายการผลงานในระบบ</p>' +
+              '<p class="empty-text" style="margin-bottom:0;">กรอกแบบฟอร์มด้านซ้ายเพื่อเพิ่มผลงานชิ้นแรกของคุณเข้าสู่พอร์ตโฟลิโอ</p>' +
+            '</div>';
+          return;
+        }
+
+        var html = '<div class="admin-list">';
+        state.works.forEach(function (work, idx) {
+          var catLabel = CATEGORY_LABELS[work.category] || CATEGORY_LABELS.other;
+          var embed = parseEmbedVideo(work.mediaUrl);
+          var miniMedia = '';
+
+          if (embed && embed.thumbUrl) {
+            miniMedia = '<img src="' + escapeHtml(embed.thumbUrl) + '" alt="' + escapeHtml(work.title) + '">';
+          } else if (work.mediaUrl && !embed) {
+            if (isVideoMedia(work.mediaUrl)) {
+              miniMedia = '<video src="' + escapeHtml(work.mediaUrl) + '" muted preload="metadata"></video>';
+            } else {
+              miniMedia = '<img src="' + escapeHtml(work.mediaUrl) + '" alt="' + escapeHtml(work.title) + '">';
+            }
+          } else {
+            miniMedia =
+              '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">' +
+                '<rect x="3" y="3" width="18" height="18" rx="2"></rect>' +
+                '<circle cx="8.5" cy="8.5" r="1.5"></circle>' +
+                '<polyline points="21 15 16 10 5 21"></polyline>' +
+              '</svg>';
+          }
+
+          var actionButtons = '';
+          if (pendingDeleteId === work.id) {
+            actionButtons =
+              '<button type="button" class="btn btn-danger btn-sm" data-confirm-del="' + escapeHtml(work.id) + '">ยืนยันการลบ</button>' +
+              '<button type="button" class="btn btn-secondary btn-sm" data-cancel-del="' + escapeHtml(work.id) + '">ยกเลิก</button>';
+          } else {
+            actionButtons =
+              (idx > 0 ? '<button type="button" class="btn btn-secondary btn-sm" data-moveup="' + idx + '" aria-label="เลื่อนขึ้น">&uarr;</button>' : '') +
+              (idx < state.works.length - 1 ? '<button type="button" class="btn btn-secondary btn-sm" data-movedown="' + idx + '" aria-label="เลื่อนลง">&darr;</button>' : '') +
+              '<button type="button" class="btn btn-secondary btn-sm" data-edit="' + escapeHtml(work.id) + '">แก้ไข</button>' +
+              '<button type="button" class="btn btn-danger btn-sm" data-del="' + escapeHtml(work.id) + '">ลบ</button>';
+          }
+
+          html +=
+            '<div class="admin-item">' +
+              '<div class="admin-item-info">' +
+                '<div class="admin-item-thumb">' + miniMedia + '</div>' +
+                '<div>' +
+                  '<div class="admin-item-meta">' +
+                    escapeHtml(catLabel) +
+                    (work.featured ? ' &bull; ผลงานเด่น' : '') +
+                    (work.client ? ' &bull; ' + escapeHtml(work.client) : '') +
+                  '</div>' +
+                  '<p class="admin-item-title">' + escapeHtml(work.title) + '</p>' +
+                '</div>' +
+              '</div>' +
+              '<div class="admin-item-actions">' + actionButtons + '</div>' +
+            '</div>';
+        });
+        html += '</div>';
+        listEl.innerHTML = html;
+
+        listEl.querySelectorAll('[data-moveup]').forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            var i = parseInt(btn.getAttribute('data-moveup'), 10);
+            if (i > 0) {
+              var temp = state.works[i - 1];
+              state.works[i - 1] = state.works[i];
+              state.works[i] = temp;
+              saveState();
+              renderAdminWorks();
+              renderPortfolio();
+            }
+          });
+        });
+
+        listEl.querySelectorAll('[data-movedown]').forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            var i = parseInt(btn.getAttribute('data-movedown'), 10);
+            if (i < state.works.length - 1) {
+              var temp = state.works[i + 1];
+              state.works[i + 1] = state.works[i];
+              state.works[i] = temp;
+              saveState();
+              renderAdminWorks();
+              renderPortfolio();
+            }
+          });
+        });
+
+        listEl.querySelectorAll('[data-edit]').forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            startEditWork(btn.getAttribute('data-edit'));
+          });
+        });
+
+        listEl.querySelectorAll('[data-del]').forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            pendingDeleteId = btn.getAttribute('data-del');
+            renderAdminWorks();
+          });
+        });
+
+        listEl.querySelectorAll('[data-cancel-del]').forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            pendingDeleteId = null;
+            renderAdminWorks();
+          });
+        });
+
+        listEl.querySelectorAll('[data-confirm-del]').forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            var id = btn.getAttribute('data-confirm-del');
+            state.works = state.works.filter(function (w) { return w.id !== id; });
+            pendingDeleteId = null;
+            if (document.getElementById('workEditId').value === id) {
+              resetWorkForm();
+            }
+            saveState();
+            renderAdminWorks();
+            renderPortfolio();
+          });
+        });
+      }
+
+      // Render Client Inquiries in Admin View
+      function renderAdminInquiries() {
+        var listEl = document.getElementById('adminInquiriesList');
+        if (!state.inquiries || state.inquiries.length === 0) {
+          listEl.innerHTML =
+            '<div class="empty-state" style="padding: 36px 20px;">' +
+              '<p class="empty-title">ยังไม่มีข้อความติดต่องานจากลูกค้า</p>' +
+              '<p class="empty-text" style="margin-bottom:0;">เมื่อลูกค้าส่งรายละเอียดผ่านแบบฟอร์มสอบถามคิวงานหน้าเว็บ ข้อมูลจะแสดงที่นี่ทันที</p>' +
+            '</div>';
+          return;
+        }
+
+        var html = '<div class="admin-list">';
+        state.inquiries.forEach(function (inq) {
+          var isDone = inq.status === 'contacted';
+          var srvLabel = SERVICE_INQUIRY_LABELS[inq.service] || SERVICE_INQUIRY_LABELS.other;
+          var actionsHtml = '';
+
+          if (pendingDeleteInquiryId === inq.id) {
+            actionsHtml =
+              '<button type="button" class="btn btn-danger btn-sm" data-confirm-del-inq="' + escapeHtml(inq.id) + '">ยืนยันลบ</button>' +
+              '<button type="button" class="btn btn-secondary btn-sm" data-cancel-del-inq="' + escapeHtml(inq.id) + '">ยกเลิก</button>';
+          } else {
+            actionsHtml =
+              '<button type="button" class="btn btn-secondary btn-sm" data-toggle-inq="' + escapeHtml(inq.id) + '">' +
+                (isDone ? 'ทำเครื่องหมายรอติดต่อ' : 'ทำเครื่องหมายว่าติดต่อแล้ว') +
+              '</button>' +
+              '<button type="button" class="btn btn-danger btn-sm" data-del-inq="' + escapeHtml(inq.id) + '">ลบ</button>';
+          }
+
+          html +=
+            '<div class="inquiry-item">' +
+              '<div class="inquiry-item-top">' +
+                '<div>' +
+                  '<div style="display:flex; align-items:center; gap: 8px; flex-wrap:wrap; margin-bottom: 4px;">' +
+                    '<span class="status-pill ' + (isDone ? 'is-done' : '') + '">' + (isDone ? 'ติดต่อกลับแล้ว' : 'รอติดต่อกลับ') + '</span>' +
+                    '<span class="admin-item-meta">' + escapeHtml(srvLabel) + '</span>' +
+                    (inq.createdAt ? '<span class="work-client">&bull; ' + escapeHtml(inq.createdAt) + '</span>' : '') +
+                  '</div>' +
+                  '<p class="admin-item-title" style="font-size: 1.05rem;">' + escapeHtml(inq.name) + '</p>' +
+                  '<div style="font-size: 0.9rem; color: var(--brand); margin-top: 2px;">ติดต่อกลับ: ' + escapeHtml(inq.contact) + (inq.date ? ' | ช่วงวันที่: ' + escapeHtml(inq.date) : '') + '</div>' +
+                '</div>' +
+                '<div class="admin-item-actions">' + actionsHtml + '</div>' +
+              '</div>' +
+              '<p class="modal-desc" style="font-size: 0.92rem; background: rgba(0,0,0,0.22); padding: 10px 14px; border-radius: 8px; margin-top: 6px;">' + escapeHtml(inq.message) + '</p>' +
+            '</div>';
+        });
+        html += '</div>';
+        listEl.innerHTML = html;
+
+        listEl.querySelectorAll('[data-toggle-inq]').forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            var id = btn.getAttribute('data-toggle-inq');
+            state.inquiries = state.inquiries.map(function (item) {
+              if (item.id === id) {
+                return Object.assign({}, item, { status: item.status === 'contacted' ? 'pending' : 'contacted' });
+              }
+              return item;
+            });
+            saveState();
+            renderAdminInquiries();
+          });
+        });
+
+        listEl.querySelectorAll('[data-del-inq]').forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            pendingDeleteInquiryId = btn.getAttribute('data-del-inq');
+            renderAdminInquiries();
+          });
+        });
+
+        listEl.querySelectorAll('[data-cancel-del-inq]').forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            pendingDeleteInquiryId = null;
+            renderAdminInquiries();
+          });
+        });
+
+        listEl.querySelectorAll('[data-confirm-del-inq]').forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            var id = btn.getAttribute('data-confirm-del-inq');
+            state.inquiries = state.inquiries.filter(function (item) { return item.id !== id; });
+            pendingDeleteInquiryId = null;
+            saveState();
+            renderAdminInquiries();
+          });
+        });
+      }
+
+      // Lightbox Modal with Prev/Next & Embed support
+      function openLightbox(workId) {
+        var filtered = getFilteredWorks();
+        var list = filtered.length > 0 ? filtered : state.works;
+        var idx = list.findIndex(function (w) { return w.id === workId; });
+        var work = idx !== -1 ? list[idx] : state.works.find(function (w) { return w.id === workId; });
+        if (!work) return;
+
+        activeLightboxWorkId = work.id;
+        var modal = document.getElementById('lightboxModal');
+        var mediaBox = document.getElementById('modalMediaContainer');
+        document.getElementById('modalWorkCategory').textContent =
+          (CATEGORY_LABELS[work.category] || CATEGORY_LABELS.other) + (work.featured ? ' • ผลงานเด่น' : '');
+        document.getElementById('modalWorkClient').textContent = work.client || '';
+        document.getElementById('modalWorkTitle').textContent = work.title;
+        document.getElementById('modalWorkDesc').textContent = work.description || 'ไม่มีคำอธิบายเพิ่มเติม';
+
+        var embed = parseEmbedVideo(work.mediaUrl);
+        if (embed) {
+          mediaBox.innerHTML =
+            '<div class="embed-frame-wrap">' +
+              '<iframe src="' + escapeHtml(embed.embedUrl) + '" title="' + escapeHtml(work.title) + '" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' +
+            '</div>';
+          mediaBox.hidden = false;
+        } else if (work.mediaUrl) {
+          if (isVideoMedia(work.mediaUrl)) {
+            mediaBox.innerHTML = '<video src="' + escapeHtml(work.mediaUrl) + '" controls autoplay playsinline></video>';
+          } else {
+            mediaBox.innerHTML = '<img src="' + escapeHtml(work.mediaUrl) + '" alt="' + escapeHtml(work.title) + '">';
+          }
+          mediaBox.hidden = false;
+        } else {
+          mediaBox.innerHTML = '';
+          mediaBox.hidden = true;
+        }
+
+        var navBar = document.getElementById('modalNavBar');
+        if (list.length > 1 && idx !== -1) {
+          navBar.hidden = false;
+          document.getElementById('prevWorkBtn').disabled = false;
+          document.getElementById('nextWorkBtn').disabled = false;
+        } else {
+          navBar.hidden = true;
+        }
+
+        modal.hidden = false;
+        document.getElementById('closeModalBtn').focus();
+      }
+
+      function stepLightbox(direction) {
+        if (!activeLightboxWorkId) return;
+        var filtered = getFilteredWorks();
+        var list = filtered.length > 0 ? filtered : state.works;
+        if (list.length <= 1) return;
+        var idx = list.findIndex(function (w) { return w.id === activeLightboxWorkId; });
+        if (idx === -1) return;
+        var nextIdx = (idx + direction + list.length) % list.length;
+        openLightbox(list[nextIdx].id);
+      }
+
+      function closeLightbox() {
+        var modal = document.getElementById('lightboxModal');
+        var mediaBox = document.getElementById('modalMediaContainer');
+        mediaBox.innerHTML = '';
+        activeLightboxWorkId = null;
+        modal.hidden = true;
+      }
+
+      // Google Identity Services JWT Decoder & Integration (when Google OAuth Client ID is provided)
+      function decodeJwtPayload(token) {
+        try {
+          var base64Url = token.split('.')[1];
+          var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+          var jsonPayload = decodeURIComponent(
+            atob(base64)
+              .split('')
+              .map(function (c) {
+                return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+              })
+              .join('')
+          );
+          return JSON.parse(jsonPayload);
+        } catch (e) {
+          return null;
+        }
+      }
+
+      function handleGoogleCredentialResponse(response) {
+        var errEl = document.getElementById('authErrorMsg');
+        var payload = decodeJwtPayload(response && response.credential ? response.credential : '');
+        if (!payload || !payload.email) {
+          errEl.textContent = 'ไม่สามารถอ่านข้อมูลบัญชี Google ได้ กรุณาลองใหม่อีกครั้ง';
+          errEl.hidden = false;
+          return;
+        }
+        if (
+          payload.email_verified &&
+          state.auth.adminEmail &&
+          payload.email.toLowerCase() === state.auth.adminEmail.toLowerCase()
+        ) {
+          errEl.hidden = true;
+          saveSessionAuth(true);
+          closeAuthModal();
+          switchMode(true);
+          switchAdminTab(pendingAdminTab || 'works');
+        } else {
+          errEl.textContent = 'บัญชี Google (' + payload.email + ') ไม่มีสิทธิ์แอดมิน ระบบอนุญาตเฉพาะ ' + state.auth.adminEmail + ' เท่านั้น';
+          errEl.hidden = false;
+        }
+      }
+
+      function tryRenderGoogleSignInButton() {
+        var clientId = (state.auth.googleClientId || '').trim();
+        var area = document.getElementById('googleSignInArea');
+        var btnContainer = document.getElementById('g_id_signin_btn');
+        if (!clientId || !state.auth.adminEmail) {
+          area.hidden = true;
+          return;
+        }
+        area.hidden = false;
+
+        function initGis() {
+          if (!window.google || !window.google.accounts || !window.google.accounts.id) return;
+          try {
+            if (gisLoadedClientId !== clientId) {
+              window.google.accounts.id.initialize({
+                client_id: clientId,
+                callback: handleGoogleCredentialResponse
+              });
+              gisLoadedClientId = clientId;
+            }
+            btnContainer.innerHTML = '';
+            window.google.accounts.id.renderButton(btnContainer, {
+              theme: 'filled_black',
+              size: 'large',
+              shape: 'pill',
+              text: 'signin_with',
+              width: 300
+            });
+          } catch (e) {
+            area.hidden = true;
+          }
+        }
+
+        if (window.google && window.google.accounts && window.google.accounts.id) {
+          initGis();
+        } else if (!document.getElementById('gisClientScript')) {
+          var script = document.createElement('script');
+          script.id = 'gisClientScript';
+          script.src='about:invalid#zPythonSafez';
+          script.async = true;
+          script.defer = true;
+          script.onload = initGis;
+          script.onerror = function () {
+            area.hidden = true;
+          };
+          document.head.appendChild(script);
+        }
+      }
+
+      function openAuthModal(targetTab) {
+        pendingAdminTab = targetTab || 'works';
+        var modal = document.getElementById('authModal');
+        var isFirstSetup = !state.auth.adminEmail;
+        var titleEl = document.getElementById('authModalTitle');
+        var descEl = document.getElementById('authModalDesc');
+        var passLabel = document.getElementById('authPassLabel');
+        var submitBtn = document.getElementById('authSubmitBtn');
+        var emailInput = document.getElementById('authEmailInput');
+        var passInput = document.getElementById('authPassInput');
+        var errEl = document.getElementById('authErrorMsg');
+        var noteText = document.getElementById('previewAuthNoteText');
+
+        errEl.hidden = true;
+        passInput.value = '';
+
+        if (isFirstSetup) {
+          titleEl.textContent = 'ตั้งค่าบัญชี Google แอดมินครั้งแรก';
+          descEl.textContent = 'กำหนดอีเมลบัญชี Google ของคุณและรหัสผ่านแอดมิน เพื่อป้องกันไม่ให้ผู้อื่นเข้าแก้ไขพอร์ตโฟลิโอหลังบ้าน';
+          passLabel.textContent = 'กำหนดรหัสผ่านแอดมิน (อย่างน้อย 4 ตัวอักษร) *';
+          submitBtn.textContent = 'ลงทะเบียนแอดมินและเข้าสู่ระบบ';
+          noteText.textContent = 'ระบบจะผูกสิทธิ์แอดมินไว้กับอีเมล Google ที่คุณระบุด้านล่างนี้เท่านั้น';
+          emailInput.value = '';
+          document.getElementById('googleSignInArea').hidden = true;
+        } else {
+          titleEl.textContent = 'เข้าสู่ระบบแอดมินด้วยบัญชี Google';
+          descEl.textContent = 'กรุณายืนยันตัวตนด้วยอีเมลบัญชี Google ของแอดมินที่ลงทะเบียนไว้เพื่อเข้าจัดการหลังบ้าน';
+          passLabel.textContent = 'รหัสผ่านแอดมิน *';
+          submitBtn.textContent = 'เข้าสู่ระบบจัดการหลังบ้าน';
+          noteText.textContent = 'ยืนยันตัวตนด้วยอีเมล Google แอดมินคู่กับรหัสผ่าน (หรือตั้งค่า Google OAuth Client ID เพิ่มเติมได้ในหลังบ้าน)';
+          emailInput.value = '';
+          tryRenderGoogleSignInButton();
+        }
+
+        modal.hidden = false;
+        emailInput.focus();
+      }
+
+      function closeAuthModal() {
+        document.getElementById('authModal').hidden = true;
+        document.getElementById('authPassInput').value = '';
+        document.getElementById('authErrorMsg').hidden = true;
+      }
+
+      function requestAdminAccess(targetTab) {
+        if (isAdminAuthenticated && state.auth.adminEmail) {
+          switchMode(true);
+          if (targetTab) switchAdminTab(targetTab);
+        } else {
+          openAuthModal(targetTab || 'works');
+        }
+      }
+
+      // Switch between Public & Admin Mode
+      function switchMode(admin) {
+        isAdminMode = admin;
+        var publicView = document.getElementById('publicView');
+        var adminView = document.getElementById('adminView');
+        var navLinks = document.getElementById('publicNavLinks');
+        var toggleBtn = document.getElementById('toggleAdminBtn');
+        var toggleLabel = document.getElementById('toggleAdminLabel');
+
+        if (isAdminMode) {
+          publicView.hidden = true;
+          adminView.hidden = false;
+          navLinks.style.display = 'none';
+          toggleBtn.classList.add('is-active');
+          toggleLabel.textContent = 'หน้าเว็บไซต์ลูกค้า';
+          document.getElementById('adminEmailLabel').textContent = state.auth.adminEmail || 'แอดมิน';
+          populateSettingsForm();
+          populateSecurityForm();
+          renderAdminWorks();
+          renderAdminInquiries();
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        } else {
+          publicView.hidden = false;
+          adminView.hidden = true;
+          navLinks.style.display = 'flex';
+          toggleBtn.classList.remove('is-active');
+          toggleLabel.textContent = isAdminAuthenticated ? 'ระบบหลังบ้าน (แอดมิน)' : 'เข้าสู่ระบบแอดมิน';
+          renderSettings();
+          renderPortfolio();
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+      }
+
+      function switchAdminTab(tabName) {
+        var worksPane = document.getElementById('adminWorksPane');
+        var inquiriesPane = document.getElementById('adminInquiriesPane');
+        var settingsPane = document.getElementById('adminSettingsPane');
+        var securityPane = document.getElementById('adminSecurityPane');
+
+        document.querySelectorAll('.admin-tab').forEach(function (t) {
+          t.classList.toggle('is-active', t.getAttribute('data-admintab') === tabName);
+        });
+
+        worksPane.hidden = tabName !== 'works';
+        inquiriesPane.hidden = tabName !== 'inquiries';
+        settingsPane.hidden = tabName !== 'settings';
+        securityPane.hidden = tabName !== 'security';
+
+        if (tabName === 'settings') populateSettingsForm();
+        if (tabName === 'inquiries') renderAdminInquiries();
+        if (tabName === 'security') {
+          document.getElementById('securitySavedNotice').hidden = true;
+          populateSecurityForm();
+        }
+      }
+
+      function populateSettingsForm() {
+        var s = state.settings;
+        document.getElementById('setBrandName').value = s.brandName || '';
+        document.getElementById('setHeroTitle').value = s.heroTitle || '';
+        document.getElementById('setHeroSubtitle').value = s.heroSubtitle || '';
+        document.getElementById('setSrvPhotoDesc').value = s.srvPhotoDesc || '';
+        document.getElementById('setSrvVideoDesc').value = s.srvVideoDesc || '';
+        document.getElementById('setSrvOtherDesc').value = s.srvOtherDesc || '';
+        document.getElementById('setPhone').value = s.phone || '';
+        document.getElementById('setLine').value = s.line || '';
+        document.getElementById('setEmail').value = s.email || '';
+        document.getElementById('setLocation').value = s.location || '';
+      }
+
+      function populateSecurityForm() {
+        document.getElementById('secAdminEmail').value = state.auth.adminEmail || '';
+        document.getElementById('secNewPasscode').value = '';
+        document.getElementById('secGoogleClientId').value = state.auth.googleClientId || '';
+        document.getElementById('secEmailError').hidden = true;
+        document.getElementById('secPassError').hidden = true;
+      }
+
+      function updateFormPreview(url) {
+        var box = document.getElementById('formMediaPreview');
+        if (!url) {
+          box.innerHTML = '';
+          box.hidden = true;
+          return;
+        }
+        box.hidden = false;
+        var embed = parseEmbedVideo(url);
+        if (embed) {
+          box.innerHTML =
+            '<div class="embed-frame-wrap" style="max-height: 196px;">' +
+              '<iframe src="' + escapeHtml(embed.embedUrl) + '" title="ตัวอย่างวิดีโอ" allowfullscreen></iframe>' +
+            '</div>';
+        } else if (isVideoMedia(url)) {
+          box.innerHTML = '<video src="' + escapeHtml(url) + '" controls muted playsinline></video>';
+        } else {
+          box.innerHTML = '<img src="' + escapeHtml(url) + '" alt="ตัวอย่างผลงาน">';
+        }
+      }
+
+      function resetWorkForm() {
+        document.getElementById('workEditId').value = '';
+        document.getElementById('workTitleInput').value = '';
+        document.getElementById('workCategoryInput').value = 'photo';
+        document.getElementById('workClientInput').value = '';
+        document.getElementById('workFileInput').value = '';
+        document.getElementById('workUrlInput').value = '';
+        document.getElementById('workDescInput').value = '';
+        document.getElementById('workFeaturedInput').checked = false;
+        document.getElementById('workTitleError').hidden = true;
+        document.getElementById('workFormHeading').textContent = 'เพิ่มผลงานใหม่';
+        document.getElementById('saveWorkBtn').textContent = 'บันทึกผลงาน';
+        document.getElementById('cancelEditBtn').hidden = true;
+        uploadedDataUrl = '';
+        updateFormPreview('');
+      }
+
+      function startEditWork(id) {
+        var work = state.works.find(function (w) { return w.id === id; });
+        if (!work) return;
+
+        document.getElementById('workEditId').value = work.id;
+        document.getElementById('workTitleInput').value = work.title;
+        document.getElementById('workCategoryInput').value = work.category;
+        document.getElementById('workClientInput').value = work.client || '';
+        document.getElementById('workFileInput').value = '';
+        document.getElementById('workDescInput').value = work.description || '';
+        document.getElementById('workFeaturedInput').checked = Boolean(work.featured);
+        document.getElementById('workTitleError').hidden = true;
+
+        if (work.mediaUrl && work.mediaUrl.indexOf('data:') === 0) {
+          uploadedDataUrl = work.mediaUrl;
+          document.getElementById('workUrlInput').value = '';
+        } else {
+          uploadedDataUrl = '';
+          document.getElementById('workUrlInput').value = work.mediaUrl || '';
+        }
+
+        updateFormPreview(work.mediaUrl || '');
+        document.getElementById('workFormHeading').textContent = 'แก้ไขผลงาน';
+        document.getElementById('saveWorkBtn').textContent = 'อัปเดตผลงาน';
+        document.getElementById('cancelEditBtn').hidden = false;
+        document.getElementById('workTitleInput').focus();
+      }
+
+      // Compress uploaded image via Canvas so client-side storage remains fast and lightweight
+      function compressImageFile(file, callback) {
+        var reader = new FileReader();
+        reader.onload = function (ev) {
+          var img = new Image();
+          img.onload = function () {
+            var maxDim = 1280;
+            var w = img.width;
+            var h = img.height;
+            if (w > maxDim || h > maxDim) {
+              if (w > h) {
+                h = Math.round((h * maxDim) / w);
+                w = maxDim;
+              } else {
+                w = Math.round((w * maxDim) / h);
+                h = maxDim;
+              }
+            }
+            var canvas = document.createElement('canvas');
+            canvas.width = w;
+            canvas.height = h;
+            var ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0, w, h);
+            callback(canvas.toDataURL('image/jpeg', 0.82));
+          };
+          img.onerror = function () {
+            callback(ev.target.result);
+          };
+          img.src = ev.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
+
+      // Event Listeners
+      document.getElementById('toggleAdminBtn').addEventListener('click', function () {
+        if (isAdminMode) {
+          switchMode(false);
+        } else {
+          requestAdminAccess('works');
+        }
+      });
+
+      document.getElementById('backToPublicBtn').addEventListener('click', function () {
+        switchMode(false);
+      });
+
+      document.getElementById('adminLogoutBtn').addEventListener('click', function () {
+        saveSessionAuth(false);
+        switchMode(false);
+      });
+
+      document.getElementById('closeAuthModalBtn').addEventListener('click', closeAuthModal);
+      document.getElementById('authModal').addEventListener('click', function (e) {
+        if (e.target === this) closeAuthModal();
+      });
+
+      document.getElementById('authForm').addEventListener('submit', function (e) {
+        e.preventDefault();
+        var email = document.getElementById('authEmailInput').value.trim();
+        var pass = document.getElementById('authPassInput').value;
+        var errEl = document.getElementById('authErrorMsg');
+
+        if (!isValidEmail(email)) {
+          errEl.textContent = 'กรุณากรอกอีเมลบัญชี Google ให้ถูกต้อง (เช่น name@gmail.com)';
+          errEl.hidden = false;
+          document.getElementById('authEmailInput').focus();
+          return;
+        }
+
+        if (!state.auth.adminEmail) {
+          // First-time Admin Registration
+          if (!pass || pass.length < 4) {
+            errEl.textContent = 'กรุณากำหนดรหัสผ่านแอดมินอย่างน้อย 4 ตัวอักษร';
+            errEl.hidden = false;
+            document.getElementById('authPassInput').focus();
+            return;
+          }
+          state.auth.adminEmail = email;
+          state.auth.passcodeHash = hashCredentials(email, pass);
+          saveState();
+          saveSessionAuth(true);
+          closeAuthModal();
+          switchMode(true);
+          switchAdminTab(pendingAdminTab || 'works');
+          return;
+        }
+
+        // Verify Registered Admin Google Email & Passcode
+        var emailMatches = email.toLowerCase() === state.auth.adminEmail.toLowerCase();
+        var passMatches = hashCredentials(email, pass) === state.auth.passcodeHash;
+
+        if (!emailMatches || !passMatches) {
+          errEl.textContent = 'อีเมลแอดมินหรือรหัสผ่านไม่ถูกต้อง เฉพาะบัญชีแอดมินที่ลงทะเบียนไว้เท่านั้นที่เข้าถึงได้';
+          errEl.hidden = false;
+          return;
+        }
+
+        errEl.hidden = true;
+        saveSessionAuth(true);
+        closeAuthModal();
+        switchMode(true);
+        switchAdminTab(pendingAdminTab || 'works');
+      });
+
+      document.getElementById('securityForm').addEventListener('submit', function (e) {
+        e.preventDefault();
+        var newEmail = document.getElementById('secAdminEmail').value.trim();
+        var newPass = document.getElementById('secNewPasscode').value;
+        var clientId = document.getElementById('secGoogleClientId').value.trim();
+        var emailErr = document.getElementById('secEmailError');
+        var passErr = document.getElementById('secPassError');
+
+        emailErr.hidden = true;
+        passErr.hidden = true;
+
+        if (!isValidEmail(newEmail)) {
+          emailErr.hidden = false;
+          document.getElementById('secAdminEmail').focus();
+          return;
+        }
+        if (newPass && newPass.length < 4) {
+          passErr.hidden = false;
+          document.getElementById('secNewPasscode').focus();
+          return;
+        }
+
+        var emailChanged = newEmail.toLowerCase() !== (state.auth.adminEmail || '').toLowerCase();
+        if (emailChanged && !newPass) {
+          passErr.textContent = 'เมื่อเปลี่ยนอีเมลแอดมินใหม่ กรุณากำหนดรหัสผ่านแอดมินควบคู่กัน (อย่างน้อย 4 ตัวอักษร)';
+          passErr.hidden = false;
+          document.getElementById('secNewPasscode').focus();
+          return;
+        }
+
+        state.auth.adminEmail = newEmail;
+        if (newPass) {
+          state.auth.passcodeHash = hashCredentials(newEmail, newPass);
+        }
+        state.auth.googleClientId = clientId;
+        saveState();
+        saveSessionAuth(true);
+        document.getElementById('adminEmailLabel').textContent = state.auth.adminEmail;
+        document.getElementById('secNewPasscode').value = '';
+        document.getElementById('securitySavedNotice').hidden = false;
+      });
+
+      document.getElementById('brandHomeBtn').addEventListener('click', function () {
+        if (isAdminMode) {
+          switchMode(false);
+        } else {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+      });
+
+      document.querySelectorAll('[data-scroll]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var targetId = btn.getAttribute('data-scroll');
+          var targetEl = document.getElementById(targetId);
+          if (targetEl) {
+            targetEl.scrollIntoView({ behavior: 'smooth' });
+          }
+        });
+      });
+
+      document.querySelectorAll('.filter-tab').forEach(function (tab) {
+        tab.addEventListener('click', function () {
+          currentFilter = tab.getAttribute('data-filter');
+          document.querySelectorAll('.filter-tab').forEach(function (t) {
+            t.classList.toggle('is-active', t === tab);
+          });
+          renderPortfolio();
+        });
+      });
+
+      document.getElementById('portfolioSearchInput').addEventListener('input', function (e) {
+        searchQuery = e.target.value || '';
+        renderPortfolio();
+      });
+
+      document.querySelectorAll('.admin-tab').forEach(function (tab) {
+        tab.addEventListener('click', function () {
+          switchAdminTab(tab.getAttribute('data-admintab'));
+        });
+      });
+
+      document.getElementById('workFileInput').addEventListener('change', function (e) {
+        var file = e.target.files && e.target.files[0];
+        if (!file) return;
+        compressImageFile(file, function (dataUrl) {
+          uploadedDataUrl = dataUrl;
+          document.getElementById('workUrlInput').value = '';
+          updateFormPreview(uploadedDataUrl);
+        });
+      });
+
+      document.getElementById('workUrlInput').addEventListener('input', function (e) {
+        var val = e.target.value.trim();
+        if (val) {
+          uploadedDataUrl = '';
+          document.getElementById('workFileInput').value = '';
+          updateFormPreview(val);
+        } else if (!uploadedDataUrl) {
+          updateFormPreview('');
+        }
+      });
+
+      document.getElementById('workTitleInput').addEventListener('input', function () {
+        if (this.value.trim()) {
+          document.getElementById('workTitleError').hidden = true;
+        }
+      });
+
+      document.getElementById('cancelEditBtn').addEventListener('click', function () {
+        resetWorkForm();
+      });
+
+      document.getElementById('workForm').addEventListener('submit', function (e) {
+        e.preventDefault();
+        var titleInput = document.getElementById('workTitleInput');
+        var title = titleInput.value.trim();
+        if (!title) {
+          document.getElementById('workTitleError').hidden = false;
+          titleInput.focus();
+          return;
+        }
+
+        var category = document.getElementById('workCategoryInput').value;
+        var client = document.getElementById('workClientInput').value.trim();
+        var urlInput = document.getElementById('workUrlInput').value.trim();
+        var mediaUrl = uploadedDataUrl || urlInput;
+        var description = document.getElementById('workDescInput').value.trim();
+        var featured = document.getElementById('workFeaturedInput').checked;
+        var editId = document.getElementById('workEditId').value;
+
+        if (editId) {
+          state.works = state.works.map(function (w) {
+            if (w.id === editId) {
+              return {
+                id: w.id,
+                title: title,
+                category: category,
+                client: client,
+                mediaUrl: mediaUrl,
+                description: description,
+                featured: featured
+              };
+            }
+            return w;
+          });
+        } else {
+          state.works.unshift({
+            id: 'work_' + Date.now() + '_' + Math.random().toString(36).slice(2, 7),
+            title: title,
+            category: category,
+            client: client,
+            mediaUrl: mediaUrl,
+            description: description,
+            featured: featured
+          });
+        }
+
+        saveState();
+        resetWorkForm();
+        renderAdminWorks();
+        renderPortfolio();
+      });
+
+      // Public Client Inquiry Form submission
+      ['inqNameInput', 'inqContactInput', 'inqMessageInput'].forEach(function (id) {
+        document.getElementById(id).addEventListener('input', function () {
+          document.getElementById('inquirySuccessNotice').hidden = true;
+        });
+      });
+
+      document.getElementById('inquiryForm').addEventListener('submit', function (e) {
+        e.preventDefault();
+        var nameEl = document.getElementById('inqNameInput');
+        var contactEl = document.getElementById('inqContactInput');
+        var msgEl = document.getElementById('inqMessageInput');
+
+        var name = nameEl.value.trim();
+        var contact = contactEl.value.trim();
+        var message = msgEl.value.trim();
+
+        document.getElementById('inqNameError').hidden = Boolean(name);
+        document.getElementById('inqContactError').hidden = Boolean(contact);
+        document.getElementById('inqMessageError').hidden = Boolean(message);
+
+        if (!name) { nameEl.focus(); return; }
+        if (!contact) { contactEl.focus(); return; }
+        if (!message) { msgEl.focus(); return; }
+
+        var now = new Date();
+        var dateLabel = now.toLocaleDateString('th-TH', { year: 'numeric', month: 'short', day: 'numeric' });
+
+        state.inquiries.unshift({
+          id: 'inq_' + Date.now() + '_' + Math.random().toString(36).slice(2, 6),
+          name: name,
+          contact: contact,
+          service: document.getElementById('inqServiceInput').value,
+          date: document.getElementById('inqDateInput').value.trim(),
+          message: message,
+          status: 'pending',
+          createdAt: dateLabel
+        });
+
+        saveState();
+        nameEl.value = '';
+        contactEl.value = '';
+        document.getElementById('inqDateInput').value = '';
+        msgEl.value = '';
+        document.getElementById('inquirySuccessNotice').hidden = false;
+      });
+
+      document.getElementById('settingsForm').addEventListener('submit', function (e) {
+        e.preventDefault();
+        state.settings = {
+          brandName: document.getElementById('setBrandName').value.trim() || defaultState.settings.brandName,
+          heroTitle: document.getElementById('setHeroTitle').value.trim() || defaultState.settings.heroTitle,
+          heroSubtitle: document.getElementById('setHeroSubtitle').value.trim() || defaultState.settings.heroSubtitle,
+          srvPhotoDesc: document.getElementById('setSrvPhotoDesc').value.trim() || defaultState.settings.srvPhotoDesc,
+          srvVideoDesc: document.getElementById('setSrvVideoDesc').value.trim() || defaultState.settings.srvVideoDesc,
+          srvOtherDesc: document.getElementById('setSrvOtherDesc').value.trim() || defaultState.settings.srvOtherDesc,
+          phone: document.getElementById('setPhone').value.trim(),
+          line: document.getElementById('setLine').value.trim(),
+          email: document.getElementById('setEmail').value.trim(),
+          location: document.getElementById('setLocation').value.trim()
+        };
+        saveState();
+        renderSettings();
+        switchMode(false);
+      });
+
+      document.getElementById('prevWorkBtn').addEventListener('click', function () {
+        stepLightbox(-1);
+      });
+      document.getElementById('nextWorkBtn').addEventListener('click', function () {
+        stepLightbox(1);
+      });
+      document.getElementById('closeModalBtn').addEventListener('click', closeLightbox);
+      document.getElementById('lightboxModal').addEventListener('click', function (e) {
+        if (e.target === this) closeLightbox();
+      });
+      document.addEventListener('keydown', function (e) {
+        var lbHidden = document.getElementById('lightboxModal').hidden;
+        var authHidden = document.getElementById('authModal').hidden;
+        if (e.key === 'Escape') {
+          if (!lbHidden) closeLightbox();
+          if (!authHidden) closeAuthModal();
+        } else if (!lbHidden && e.key === 'ArrowLeft') {
+          stepLightbox(-1);
+        } else if (!lbHidden && e.key === 'ArrowRight') {
+          stepLightbox(1);
+        }
+      });
+
+      // Initial render
+      document.getElementById('toggleAdminLabel').textContent = isAdminAuthenticated ? 'ระบบหลังบ้าน (แอดมิน)' : 'เข้าสู่ระบบแอดมิน';
+      renderSettings();
+      renderPortfolio();
+    })();
+  </script>
+</body>
+</html>
